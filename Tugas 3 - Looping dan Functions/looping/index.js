@@ -6,8 +6,6 @@ var persegiPanjang = looping.persegiPanjang;
 var tangga = looping.tangga;
 var catur = looping.catur;
 
-var args = process.argv;
-
 var args = process.argv
 
 switch (args[2]) {
