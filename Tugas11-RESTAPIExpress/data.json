@@ -1,0 +1,1 @@
+[{"name":"Bonda","password":"123456","role":"admin","isLogin":true},{"name":"Iqbal","password":"123456","role":"trainer","isLogin":false,"students":[{"name":"Regy","class":"Adonis"}]}]
