@@ -24,7 +24,8 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.get('/', async () => {
   return { hello: 'world' }
 })
-// Release 0 Form Venue (Validasi)
-Route.post('/venues','VenuesController.store').as('venues.store')
-// Release 1 Form Booking
-Route.post('/bookings','BookingsController.store').as('booking.store')
+
+
+Route.resource('venues', 'VenuesController').apiOnly()
+Route.resource('venues.fields','FieldsController').apiOnly()
+// Route.post('/bookings','BookingsController.store').as('booking.store')

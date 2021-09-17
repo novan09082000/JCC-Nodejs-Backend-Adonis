@@ -1,7 +1,7 @@
 import { schema , rules } from '@ioc:Adonis/Core/Validator'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class CreateVenueValidator {
+export default class CreateFieldValidator {
   constructor (protected ctx: HttpContextContract) {
   }
 
@@ -25,19 +25,11 @@ export default class CreateVenueValidator {
 	 *    ```
 	 */
   public schema = schema.create({
-	  name: schema.string({},[
-		  rules.minLength(2),
-		  rules.alpha({allow: ['space', 'underscore', 'dash']})
-	  ]),
-	  address: schema.string({},[
-		  rules.maxLength(150)
-	  ]),
-	  phone: schema.string({},[
-		  rules.mobile({
-			  locales : ['id-ID']
-		  }),
-		  rules.minLength(10)
-	  ])
+	name: schema.string({},[
+		rules.minLength(5),
+	]),
+	type: schema.enum(['futsal', 'mini soccer', 'basketball' ] as const),
+	venue_id: schema.number()
   })
 
 	/**
@@ -52,9 +44,6 @@ export default class CreateVenueValidator {
 	 *
 	 */
   public messages = {
-	'nama.alpha': 'nama bukan alphabetic',
-	'nama.minLength': 'digit nama kurang dari 2',
-	'phone.mobile': 'nomor bukan asal indonesia',
-	'phone.minLength': 'digit nomor terlalu sedikit'
+	  'type.enum' : 'pilihan tipe tidak ada'
   }
 }
