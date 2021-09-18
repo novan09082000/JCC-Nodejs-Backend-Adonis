@@ -30,8 +30,19 @@ export default class GenresController {
   }
 
   public async show ({params,response}: HttpContextContract) {
-    let genre = await Database.from('genres').where('id',params.id).select('id','name').firstOrFail()
-        return response.ok({message: 'success get genress with id', data: genre})
+    // let genre = await Database.from('genres').where('id',params.id).select('id','name').firstOrFail()
+    //     return response.ok({message: 'success get genress with id', data: genre})
+    let genres = await Database
+        .from('movies')
+        .join('genres', 'genres.id', '=', 'movies.genres_id')
+        .select('genres.id','genres.name','movies.* ')
+        // .select('genres.name as genre')
+        .where('genres.id',params.id)
+        if(genres.length == 0){
+            response.badRequest({error: 'movie id yang dicari tidak ada'})
+        }else{
+            return response.status(200).json({message: 'success get movies with id', data : genres})
+        }
   }
 
   public async update ({request,response,params}: HttpContextContract) {
