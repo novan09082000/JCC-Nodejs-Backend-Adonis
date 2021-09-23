@@ -9,13 +9,13 @@ export default class Venues extends BaseSchema {
       table.string('name').notNullable()
       table.string('address').notNullable()
       table.string('phone').notNullable()
-      table.timestamps(true,true)
+      // table.timestamps(true,true)
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */
-      // table.timestamp('created_at', { useTz: true })
-      // table.timestamp('updated_at', { useTz: true })
+      table.timestamp('created_at', { useTz: true }).defaultTo(this.now())
+      table.timestamp('updated_at', { useTz: true }).defaultTo(this.now())
     })
   }
 

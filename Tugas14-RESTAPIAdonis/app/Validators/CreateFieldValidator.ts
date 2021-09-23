@@ -29,7 +29,7 @@ export default class CreateFieldValidator {
 		rules.minLength(5),
 	]),
 	type: schema.enum(['futsal', 'mini soccer', 'basketball' ] as const),
-	venue_id: schema.number()
+	// venue_id: schema.number()
   })
 
 	/**
