@@ -25,7 +25,12 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
-
-Route.resource('venues', 'VenuesController').apiOnly()
-Route.resource('venues.fields','FieldsController').apiOnly()
+Route.group(() => {
+  Route.resource('venues', 'VenuesController').apiOnly().middleware({'*' : ['auth']})
+  Route.resource('venues.fields','FieldsController').apiOnly().middleware({'*' : ['auth']})
+  Route.resource('fields.bookings','BookingsController').apiOnly().middleware({'*' : ['auth']})
+  Route.post('/register','AuthController.register').as('auth.register')
+  Route.post('/login','AuthController.login').as('auth.login')
+  Route.put('/bookings/:id','BookingsController.join').as('Booking.join').middleware('auth')
+}).prefix('api/v1')
 // Route.post('/bookings','BookingsController.store').as('booking.store')

@@ -1,6 +1,9 @@
 // import Venue from './Venue'
 import { DateTime } from 'luxon'
-import { BaseModel, column} from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, belongsTo, BelongsTo, column, HasMany, hasMany} from '@ioc:Adonis/Lucid/Orm'
+
+import Venue from './Venue'
+import Booking from './Booking'
 
 export default class Field extends BaseModel {
   @column({ isPrimary: true })
@@ -18,11 +21,17 @@ export default class Field extends BaseModel {
   // public venue_id: HasMany<typeof Venue>
 
   @column()
-  public venue_id: number
+  public venueId: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @belongsTo(() => Venue)
+  public author: BelongsTo<typeof Venue>
+
+  @hasMany(() => Booking)
+  public myBooking: HasMany<typeof Booking>
 }

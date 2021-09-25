@@ -22,7 +22,7 @@ export default class FieldsController {
             const field = await Field.create({
                 name: request.input('name'),
                 type: request.input('type'),
-                venue_id: params.venue_id
+                venueId: params.venue_id
             })
             response.created({message: 'created'})
         } catch (error) {
@@ -62,6 +62,8 @@ export default class FieldsController {
         .where('fields.id',params.id)
         .firstOrFail()
         return response.ok({message: 'success get fields with id', data: field})
+
+
     }
     public async update({request,response,params}:HttpContextContract){
         let id = params.id;
@@ -74,7 +76,7 @@ export default class FieldsController {
         let field = await Field.findByOrFail('id',id)
             field.name = request.input('name')
             field.type = request.input('type')
-            field.venue_id =params.venue_id
+            field.venueId =params.venue_id
         field.save()
         return response.ok({message : 'updated!'})
     }
