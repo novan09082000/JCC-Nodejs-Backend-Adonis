@@ -3,6 +3,7 @@ import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany} from '@ioc:A
 
 import User from './User'
 import Field from './Field'
+import Booking from './Booking'
 
 export default class Venue extends BaseModel {
   @column({ isPrimary: true })
@@ -28,7 +29,10 @@ export default class Venue extends BaseModel {
 
   @belongsTo(() => User)
   public author: BelongsTo<typeof User>
-
+  
   @hasMany(() => Field)
   public fields: HasMany<typeof Field>
+
+  @hasMany(() => Booking)
+  public bookings: HasMany<typeof Booking>
 }

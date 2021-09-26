@@ -23,6 +23,9 @@ export default class Field extends BaseModel {
   @column()
   public venueId: number
 
+  @column()
+  public bookingId: number
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

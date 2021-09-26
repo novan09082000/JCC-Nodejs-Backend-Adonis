@@ -2,6 +2,7 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Database from '@ioc:Adonis/Lucid/Database'
 import CreateVenueValidator from 'App/Validators/CreateVenueValidator'
 import Venue from 'App/Models/Venue'
+import Field from 'App/Models/Field'
 
 export default class VenuesController {
     public async store({request,response,auth}:HttpContextContract){
@@ -37,9 +38,14 @@ export default class VenuesController {
         return response.status(200).json({message: 'success get venues', data : venues})
     }
     public async show({params,response}:HttpContextContract){
-        // let venue = await Database.from('venues').where('id',params.id).select('id','name','phone','address').firstOrFail()
+        let venue = await Database.from('venues').where('id',params.id).select('id','name','phone','address').firstOrFail()
         // let venue = await Venue.find(params.id)
-        const venue = await Venue.query().preload('fields', (fieldQuery) => {fieldQuery.select(['id','name','type'])}).where('id',params.id).first()
+        // const bookings = await Field.query().preload('myBooking').select().where('venue_id',params.id)
+        // const field = await Field.findByOrFail('venue_id',params.id)
+        // const venue = await Venue.findByOrFail('id',params.id)
+        // console.log(field);
+        
+        // const gabung = {...bookings,...venue.$original}
         return response.ok({message: 'berhasil get data venue by id', data: venue})
     }
     public async update({request,response,params}:HttpContextContract){
@@ -49,11 +55,11 @@ export default class VenuesController {
         //     phone: request.input('phone'),
         //     address: request.input('address')
         // })
-        // let venue = await Venue.findOrFail(id)
-        // venue.name = request.input('name')
-        // venue.address = request.input('address')
-        // venue.phone = request.input('phone')
-        // await venue.save()
+        let venue = await Venue.findOrFail(params.id)
+        venue.name = request.input('name')
+        venue.address = request.input('address')
+        venue.phone = request.input('phone')
+        await venue.save()
 
         return response.ok({message : 'updated!'})
     }

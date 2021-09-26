@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import Booking from './Booking'
 
 export default class Schedule extends BaseModel {
   @column({ isPrimary: true })
@@ -7,6 +8,12 @@ export default class Schedule extends BaseModel {
 
   @column()
   public userId: number
+
+  @column()
+  public bookingId: number
+
+  @belongsTo(() => Booking)
+  public myBooking: BelongsTo<typeof Booking>
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

@@ -54,13 +54,7 @@ export default class FieldsController {
     }
     public async show({params,response}:HttpContextContract){
         let field = await Field
-        .query()
-        .join('venues', 'venues.id', '=', 'fields.venue_id')
-        .select('fields.*')
-        .select('venues.name as nama_venue','venues.phone','venues.address')
-        .where('fields.venue_id',params.venue_id)
-        .where('fields.id',params.id)
-        .firstOrFail()
+        .query().preload('myBooking')
         return response.ok({message: 'success get fields with id', data: field})
 
 

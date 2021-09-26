@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, belongsTo, BelongsTo, column, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, belongsTo, BelongsTo, column, HasMany, hasMany, ManyToMany, manyToMany } from '@ioc:Adonis/Lucid/Orm'
 import Field from './Field'
 import User from './User'
+import Schedule from './Schedule'
 
 export default class Booking extends BaseModel {
   @column({ isPrimary: true })
@@ -22,12 +23,20 @@ export default class Booking extends BaseModel {
   @column()
   public fieldId: number
 
+  @column()
+  public bookingId: number
+
+  @column()
+  public scheduleId: number
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @hasMany(() => Schedule)
+  public schedule: HasMany<typeof Schedule>
 
   @belongsTo(() => Field)
   public field: BelongsTo<typeof Field>

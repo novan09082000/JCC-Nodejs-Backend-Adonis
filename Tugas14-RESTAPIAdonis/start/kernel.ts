@@ -41,5 +41,8 @@ Server.middleware.register([
 |
 */
 Server.middleware.registerNamed({
-  auth: () => import('App/Middleware/Auth')
+  auth: () => import('App/Middleware/Auth'),
+  verifyBooking: () => import('App/Middleware/VerifyBooking'),
+  verifyVenue: () => import('App/Middleware/VerifyVenue'),
+  verifyField: () => import('App/Middleware/VerifyField')       
 })
