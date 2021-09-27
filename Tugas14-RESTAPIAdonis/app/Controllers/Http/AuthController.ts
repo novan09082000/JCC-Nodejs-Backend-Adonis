@@ -6,6 +6,58 @@ import Mail from '@ioc:Adonis/Addons/Mail'
 import Database from '@ioc:Adonis/Lucid/Database'
 
 export default class AuthController {
+/**
+  * @swagger
+  * /api/v1/register:
+  *     post:
+  *       tags:
+  *         - Authentication
+  *       requestBody:
+  *         required: true
+  *         content :
+  *           application/x-www-form-urlencoded:
+  *             schema:
+  *               $ref: '#definitions/Register'
+  *           application/json:
+  *             schema:
+  *               $ref: '#definitions/Register'
+  *       responses:
+  *         200:
+  *           description: user created, verify otp in email
+  * /api/v1/otp-confirmation :
+  *     post:
+  *      tags:
+  *        - Authentication
+  *      requestBody:
+  *        required: true
+  *        content :
+  *          application/x-www-form-urlencoded:
+  *            schema:
+  *             $ref: '#definitions/Otp'
+  *          application/json:
+  *            schema:
+  *             $ref: '#definitions/Otp'
+  *      responses:
+  *        200:
+  *          description: verification successed
+  * /api/v1/login:
+  *     post:
+  *      tags:
+  *        - Authentication
+  *      requestBody:
+  *        required: true
+  *        content :
+  *          application/x-www-form-urlencoded:
+  *            schema:
+  *             $ref: '#definitions/Login'
+  *          application/json:
+  *            schema:
+  *             $ref: '#definitions/Login'
+  *      responses:
+  *        200:
+  *          description: login success
+  */
+
     public async register({request,response}:HttpContextContract){
         try {
             const payload = await request.validate(UserValidator)

@@ -32,7 +32,7 @@ Route.group(() => {
   Route.post('/otp-confirmation','AuthController.otp_verification').as('auth.verify')
   // Venues
   Route.get('/venues','VenuesController.index').as('venues.index').middleware(['auth','verifyVenue'])
-  Route.post('/venues','VenuesContrroller.store').as('venues.store').middleware(['auth','verifyVenue'])
+  Route.post('/venues','VenuesController.store').as('venues.store').middleware(['auth','verifyVenue'])
   Route.get('/venues/:id','VenuesController.show').as('venues.show').middleware(['auth','verifyVenue'])
   Route.put('/venues/:id','VenuesController.update').as('venues.update').middleware(['auth','verifyVenue'])
   Route.delete('/venues/:id','VenuesController.destroy').as('venues.destroy').middleware(['auth','verifyVenue'])

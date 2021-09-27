@@ -5,6 +5,33 @@ import User from './User'
 import Field from './Field'
 import Booking from './Booking'
 
+/** 
+*  @swagger
+*  definitions:
+*    CreateVenue:
+*      type: object
+*      properties:
+*        name:
+*          type: string
+*        phone:
+*          type: string
+*        address:
+*          type: string
+*      required:
+*        - name
+*        - phone
+*        - address
+*    UpdateVenue:
+*      type: object
+*      properties:
+*        name:
+*          type: string
+*        phone:
+*          type: string
+*        address:
+*          type: string
+*/
+
 export default class Venue extends BaseModel {
   @column({ isPrimary: true })
   public id: number

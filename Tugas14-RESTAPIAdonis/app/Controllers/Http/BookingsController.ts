@@ -5,6 +5,154 @@ import Schedule from 'App/Models/Schedule'
 import Database from '@ioc:Adonis/Lucid/Database'
 
 import FormBookingValidator from 'App/Validators/FormBookingValidator'
+/**
+  * @swagger
+  * /api/v1/fields/{field_id}/bookings:
+  *     get:
+  *       security:
+  *         - bearerAuth: []
+  *       tags:
+  *         - Bookings
+  *       parameters:
+  *         - name: field_id
+  *           description: Id Field
+  *           in: path
+  *           required: true
+  *           type: string
+  *       responses:
+  *         200:
+  *           description: success fetch articles
+  *     post:
+  *       security:
+  *         - bearerAuth: []
+  *       tags:
+  *         - Bookings
+  *       parameters:
+  *         - name: field_id
+  *           description: Id Field
+  *           in: path
+  *           required: true
+  *           type: string
+  *       requestBody:
+  *        required: true
+  *        content :
+  *          application/x-www-form-urlencoded:
+  *            schema:
+  *             $ref: '#definitions/CreateBooking'
+  *          application/json:
+  *            schema:
+  *             $ref: '#definitions/CreateBooking'
+  *       responses:
+  *         200:
+  *           description: success add booking
+  * /api/v1/fields/{field_id}/bookings/{id}:
+  *     get:
+  *      security:
+  *         - bearerAuth: [] 
+  *      tags:
+  *         - Bookings
+  *      parameters:
+  *         - name: field_id
+  *           description: Id Field
+  *           in: path
+  *           required: true
+  *           type: string
+  *         - name: id
+  *           description: Id Bookings
+  *           in: path
+  *           required: true
+  *           type: string
+  *      responses:
+  *        201:
+  *          description: success fetch articles
+  *     put:
+  *      security:
+  *         - bearerAuth: [] 
+  *      tags:
+  *         - Bookings
+  *      parameters:
+  *         - name: field_id
+  *           description: Id Field
+  *           in: path
+  *           required: true
+  *           type: string
+  *         - name: id
+  *           description: Id Bookings
+  *           in: path
+  *           required: true
+  *           type: string
+  *      requestBody:
+  *        required: true
+  *        content :
+  *          application/x-www-form-urlencoded:
+  *            schema:
+  *             $ref: '#definitions/UpdateBooking'
+  *          application/json:
+  *            schema:
+  *             $ref: '#definitions/UpdateBooking'
+  *      responses:
+  *        201:
+  *          description: updated!
+  *     delete:
+  *      security:
+  *         - bearerAuth: [] 
+  *      tags:
+  *         - Bookings
+  *      parameters:
+  *         - name: field_id
+  *           description: Id Field
+  *           in: path
+  *           required: true
+  *           type: string
+  *         - name: id
+  *           description: Id Bookings
+  *           in: path
+  *           required: true
+  *           type: string
+  *      responses:
+  *        201:
+  *          description: deleted!
+  * /api/v1/bookings/{id}/join:
+  *     put:
+  *      tags:
+  *        - Bookings
+  *      security:
+  *        - bearerAuth: [] 
+  *      parameters:
+  *        - name: id
+  *          description: Id Booking
+  *          in: path
+  *          required: true
+  *          type: string
+  *      responses:
+  *       201:
+  *         description: berhasil join booking
+  * /api/v1/bookings/{id}/unjoin:
+  *     put:
+  *      tags:
+  *        - Bookings
+  *      security:
+  *        - bearerAuth: [] 
+  *      parameters:
+  *        - name: id
+  *          description: Id Booking
+  *          in: path
+  *          required: true
+  *          type: string
+  *      responses:
+  *       201:
+  *         description: berhasil unjoin booking
+  * /api/v1/schedules:
+  *     get:
+  *      tags:
+  *        - Bookings
+  *      security:
+  *        - bearerAuth: [] 
+  *      responses:
+  *       201:
+  *         description: berhasil mendapat jadwal
+  */
+
 
 export default class BookingsController {
   public async index ({response}: HttpContextContract) {

@@ -10,6 +10,47 @@ import {
 import Venue from './Venue'
 import Booking from './Booking'
 
+/** 
+*  @swagger
+*  definitions:
+*    Register:
+*      type: object
+*      properties:
+*        name:
+*          type: string
+*        email:
+*          type: string
+*        password:
+*          type: string
+*        role:
+*          type: string
+*      required:
+*        - name
+*        - email
+*        - password
+*        - role
+*    Otp:
+*      type: object
+*      properties:
+*        email:
+*          type: string
+*        otp_code:
+*          type: number
+*      required:
+*        - email
+*        - otp_code
+*    Login:
+*      type: object
+*      properties:
+*        email:
+*          type: string
+*        password:
+*          type: string
+*      required:
+*        - email
+*        - password
+*/
+
 export default class User extends BaseModel {
   @column({ isPrimary: true })
   public id: number

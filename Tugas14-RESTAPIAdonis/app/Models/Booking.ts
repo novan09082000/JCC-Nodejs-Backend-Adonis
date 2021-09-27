@@ -4,6 +4,37 @@ import Field from './Field'
 import User from './User'
 import Schedule from './Schedule'
 
+/** 
+*  @swagger
+*  definitions:
+*    CreateBooking:
+*      type: object
+*      properties:
+*        title:
+*          type: string
+*        play_date_start:
+*          type: string
+*          format: date-time
+*        play_date_end:
+*          type: string
+*          format: date-time
+*      required:
+*        - title
+*        - play_date_start
+*        - play_date_end
+*    UpdateBooking:
+*      type: object
+*      properties:
+*        title:
+*          type: string
+*        play_date_start:
+*          type: string
+*          format: date-time
+*        play_date_end:
+*          type: string
+*          format: date-time
+*/
+
 export default class Booking extends BaseModel {
   @column({ isPrimary: true })
   public id: number

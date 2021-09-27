@@ -5,6 +5,74 @@ import Venue from 'App/Models/Venue'
 import Field from 'App/Models/Field'
 
 export default class VenuesController {
+/**
+  * @swagger
+  * /api/v1/venues:
+  *     get:
+  *       security:
+  *         - bearerAuth: []
+  *       tags:
+  *         - Venues
+  *       responses:
+  *         200:
+  *           description: success get venues
+  *     post:
+  *      security:
+  *         - bearerAuth: [] 
+  *      tags:
+  *         - Venues
+  *      requestBody:
+  *        required: true
+  *        content :
+  *          application/x-www-form-urlencoded:
+  *            schema:
+  *             $ref: '#definitions/CreateVenue'
+  *          application/json:
+  *            schema:
+  *             $ref: '#definitions/CreateVenue'
+  *      responses:
+  *        201:
+  *          description: created venue success
+  * /api/v1/venues/{id}:
+  *     put:
+  *      security:
+  *         - bearerAuth: [] 
+  *      tags:
+  *         - Venues
+  *      parameters:
+  *         - name: id
+  *           description: Id Venue
+  *           in: path
+  *           required: true
+  *           type: string
+  *      requestBody:
+  *        required: true
+  *        content :
+  *          application/x-www-form-urlencoded:
+  *            schema:
+  *             $ref: '#definitions/UpdateVenue'
+  *          application/json:
+  *            schema:
+  *             $ref: '#definitions/UpdateVenue'
+  *      responses:
+  *        201:
+  *          description: updated!
+  *     get:
+  *      security:
+  *         - bearerAuth: [] 
+  *      tags:
+  *         - Venues
+  *      parameters:
+  *         - name: id
+  *           description: Id Venue
+  *           in: path
+  *           required: true
+  *           type: string
+  *      responses:
+  *        201:
+  *          description: get venue by id
+  */
+
     public async store({request,response,auth}:HttpContextContract){
         try {
             let data = await request.validate(CreateVenueValidator)
